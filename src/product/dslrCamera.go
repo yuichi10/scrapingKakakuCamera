@@ -81,6 +81,8 @@ func SetDslrCameraInfo(data ...string) *DslrCameraInfo {
 			cameraInfo.TotalPixels = total
 			cameraInfo.ValidPixels = valid
 		case 6:
+			imageSensor := getImageSensorType(data[i])
+			cameraInfo.ImageSensor = imageSensor
 		case 7:
 		case 8:
 		case 9:

@@ -30,7 +30,13 @@ var PixelsKeyList = map[string]string{
 	"valid": "(有効画素)",
 }
 //イメージセンサーの種類
-//var ImageSensorTypeList
+var ImageSensorTypeList = []string{
+	"その他",
+	"フルサイズ",
+	"APS-C",
+	"ローパスフィルターレス",
+	"フォーサーズ",
+}
 //製品名から消すデータの一覧
 var ProductNameDeleteKeyList = []string{
 	"ボディ",

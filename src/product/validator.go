@@ -76,3 +76,12 @@ func getPixelsValues(pixel string) (int, int) {
     }
     return total, valid
 }
+//イメージセンサーの取得
+func getImageSensorType(sensor string) string {
+    for i := range ImageSensorTypeList {
+        if strings.Index(sensor, ImageSensorTypeList[i]) >= 0 {
+            return ImageSensorTypeList[i]
+        }
+    }
+    return ImageSensorTypeList[0]
+}
