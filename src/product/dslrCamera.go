@@ -21,8 +21,8 @@ type DslrCameraInfo struct {
 	IsoExtentionMax      int     `json:"iso_extention_max"`      //拡張isoの最大
 	MemoryFormat         string  `json:"memory_format"`          //記憶フォーマット
 	ContinuousShooting   string  `json:"continuous_shooting"`    //連写撮影
-	ShutterSpeedMin      int     `json:"shutter_speed_min"`      //シャッタースピードの最小
 	ShutterSpeedMax      int     `json:"shutter_speed_max"`      //シャッタースピードの最大
+	ShutterSpeedMin      int     `json:"shutter_speed_min"`      //シャッタースピードの最小
 	MonitorSize          float32 `json:"monitor_size"`           //液晶モニターのサイズ
 	MonitorDot           string  `json:"monitor_dot"`            //液晶モニターのドット
 	FinderType           string  `json:"finder_type"`            //ファインダー形式
@@ -99,7 +99,11 @@ func SetDslrCameraInfo(data ...string) *DslrCameraInfo {
 		case 10:
 			cameraInfo.ContinuousShooting = strings.TrimSpace(data[i])
 		case 11:
+			max, min := getShutterSpeeds(strings.TrimSpace(data[i]))
+			cameraInfo.ShutterSpeedMax = max
+			cameraInfo.ShutterSpeedMin = min
 		case 12:
+
 		case 13:
 		case 14:
 		case 15:

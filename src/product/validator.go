@@ -187,3 +187,25 @@ func splitIsoPatternB(val string) (int, int, bool) {
 	}
 	return min, max, isSuccess
 }
+
+//シャッタースピードの取得
+func getShutterSpeeds(val string) (int, int) {
+    min := -1
+    max := -1
+    vals := strings.Split(val, "～")
+    //速い方
+    valMax := strings.TrimSpace(vals[0])
+    valMaxs := strings.Split(valMax, "/")
+    sMax := valMaxs[len(valMaxs)-1]
+    if time, err := strconv.Atoi(sMax); err == nil {
+        max = time
+    }
+    //遅い方
+    valMin := strings.TrimSpace(vals[len(vals)-1])
+    valMins := strings.Split(valMin, " ")
+    sMin := valMins[0]
+    if time, err := strconv.Atoi(sMin); err == nil {
+        min = time
+    }
+    return max, min
+}
