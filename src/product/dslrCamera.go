@@ -72,22 +72,22 @@ func SetDslrCameraInfo(data ...string) *DslrCameraInfo {
 		switch i {
 		case 0:
 		case 1:
-			cameraInfo.Company = data[i]
+			cameraInfo.Company = strings.TrimSpace(data[i])
 		case 2:
-			cameraInfo.Name = getProductName(data[i])
+			cameraInfo.Name = getProductName(strings.TrimSpace(data[i]))
 		case 3:
-			cameraInfo.ProductType = getProductType(data[i])
+			cameraInfo.ProductType = getProductType(strings.TrimSpace(data[i]))
 		case 4:
-			cameraInfo.LensMount = getLensMountType(data[i])
+			cameraInfo.LensMount = getLensMountType(strings.TrimSpace(data[i]))
 		case 5:
-			total, valid := getPixelsValues(data[i])
+			total, valid := getPixelsValues(strings.TrimSpace(data[i]))
 			cameraInfo.TotalPixels = total
 			cameraInfo.ValidPixels = valid
 		case 6:
-			imageSensor := getImageSensorType(data[i])
+			imageSensor := getImageSensorType(strings.TrimSpace(data[i]))
 			cameraInfo.ImageSensor = imageSensor
 		case 7:
-			cameraInfo.LowPassFilter = boolCheck(data[i])
+			cameraInfo.LowPassFilter = boolCheck(strings.TrimSpace(data[i]))
 		case 8:
 			bMin, bMax, eMin, eMax := getIsoValues(strings.TrimSpace(data[i]))
 			cameraInfo.IsoMin = bMin
@@ -95,7 +95,9 @@ func SetDslrCameraInfo(data ...string) *DslrCameraInfo {
 			cameraInfo.IsoExtentionMin = eMin
 			cameraInfo.IsoExtentionMax = eMax
 		case 9:
+			cameraInfo.MemoryFormat = strings.TrimSpace(data[i])
 		case 10:
+			cameraInfo.ContinuousShooting = strings.TrimSpace(data[i])
 		case 11:
 		case 12:
 		case 13:
