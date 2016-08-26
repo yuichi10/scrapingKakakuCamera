@@ -1,0 +1,61 @@
+package product
+
+//一眼レフカメラ
+type DslrCameraInfo struct {
+	Name                 string  `json:"name"`                   //製品名
+	ProductType          int     `json:"product_type"`           //プロダクトタイプ
+	Company              string  `json:"company"`                //制作会社
+	LensMount            int     `json:"lens_mount"`             //レンズアマウント
+	PixelNumber          int     `json:"pixel_number"`           //画素数
+	ImageSensor          string  `json:"image_sensor"`           //撮像素子
+	LowPassFilter        bool    `json:"low_pass_filter"`        //ローパスフィルターレス
+	IsoMin               int     `json:"iso_min"`                //標準isoの最小
+	IsoMax               int     `json:"iso_max"`                //標準isoの最大
+	IsoExtentionMin      int     `json:"iso_extention_min"`      //拡張isoの最小
+	IsoExtentionMax      int     `json:"iso_extention_max"`      //拡張isoの最大
+	MemoryFormat         string  `json:"memory_format"`          //記憶フォーマット
+	ContinuousShooting   string  `json:"continuous_shooting"`    //連写撮影
+	ShutterSpeedMin      int     `json:"shutter_speed_min"`      //シャッタースピードの最小
+	ShutterSpeedMax      int     `json:"shutter_speed_max"`      //シャッタースピードの最大
+	MonitorSize          float32 `json:"monitor_size"`           //液晶モニターのサイズ
+	MonitorDot           string  `json:"monitor_dot"`            //液晶モニターのドット
+	FinderType           string  `json:"finder_type"`            //ファインダー形式
+	FinderMagnification  int     `json:"finder_magnification"`   //ファインダー倍率
+	FinderFinderCoverage string  `json:"finder_finder_coverage"` //ファインダー視野率
+	BatteryType          string  `json:"battery_type"`           //専用電池タイプ
+	BatteryModel         string  `json:"battery_model"`          //専用電池の型番
+	NumberOfShotLcd      int     `json:"number_of_shot_lcd"`     //液晶モニタ使用時の撮影枚数
+	NumberOfShotFinder   int     `json:"number_of_shot_finder"`  //ファインダー使用時の撮影枚数
+	StorageMedia         string  `json:"storage_media"`          //記憶メディア
+	ImageStabilization   bool    `json:"image_stabilization"`    //手ぶれ補正
+	DustRemoval          bool    `json:"dust_removal"`           //ゴミ取り機構
+	Liveview             bool    `json:"liveview"`               //ライブビュー
+	MovableMonitorType   string  `json:"movable_monitor_type"`   //可動式モニタ
+	Selfie               bool    `json:"selfie"`                 //自撮り機能
+	PictBridge           bool    `json:"pictBridge"`             //PictBridge対応
+	BuiltInStrobo        bool    `json:"built_in_strobo"`        //内蔵カメラ
+	Bulb                 bool    `json:"bulb"`                   //バルブ
+	Proof                bool    `json:"proof"`                  //防塵防滴
+	RawJpegSaveTogether  bool    `json:"raw_jpeg_save_together"` //RAW+JPEG同時記録
+	Raw                  string  `json:"raw"`                    //RAW
+	SelfTimer            string  `json:"self_timer"`             //セルフタイマー
+	Timelaps             bool    `json:"timelaps"`               //タイムラプス
+	UsbCharge            bool    `json:"usb_charge"`             //usb充電
+	Interface            string  `json:"interface"`              //インターフェース
+	Gps                  bool    `json:"gps"`                    //GPS
+	BootTime             float32 `json:"boot_time"`              //起動時間
+	Video4k              bool    `json:"video_4k"`               //4K
+	VideoPixelNumber     string  `json:"video_pixel_number"`     //動画記録画素数
+	VideoFps             int     `json:"video_fps"`              //fps
+	VideoFileType        string  `json:"video_file_type"`        //ビデオファイル形式
+	VideoCompressionWay  string  `json:"video_compression_way"`  //映像圧縮方式
+	VideoAudioMemoryWay  string  `json:"video_audio_memory_way"` //音声記録方式
+	Nfc                  bool    `json:"nfc"`                    //NFC
+	Wifi                 bool    `json:"wifi"`                   //WIFI
+	WifiDirect           bool    `json:"wifi_direct"`            //wifi_direct
+	Width                int     `json:"width"`                  //幅
+	Height               int     `json:"height"`                 //高さ
+	Depth                int     `json:"depth"`                  //奥行き
+	Weight               int     `json:"weight"`                 //重さ
+	Color                string  `json:"color"`                  //色
+}
