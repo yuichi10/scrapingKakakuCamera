@@ -1,4 +1,5 @@
 package product
+
 //プロダクトのタイプ一覧
 var ProductTypeList = map[string]int{
 	"other":  0,
@@ -7,6 +8,7 @@ var ProductTypeList = map[string]int{
 	"単焦点":    3,
 	"ズームレンズ": 4,
 }
+
 //レンズアマウントのタイプ一覧
 var LensMountTypeList = map[string]int{
 	"other": 0,
@@ -23,12 +25,14 @@ var LensMountTypeList = map[string]int{
 	"Xマウント":          11,
 	"キヤノンEF-Mマウント":   12,
 }
+
 //画素数の検索データキー
 var PixelsKeyList = map[string]string{
-	"unit": "万画素",
+	"unit":  "万画素",
 	"total": "(総画素)",
 	"valid": "(有効画素)",
 }
+
 //イメージセンサーの種類
 var ImageSensorTypeList = []string{
 	"その他",
@@ -37,13 +41,16 @@ var ImageSensorTypeList = []string{
 	"ローパスフィルターレス",
 	"フォーサーズ",
 }
+
 //製品名から消すデータの一覧
 var ProductNameDeleteKeyList = []string{
 	"ボディ",
 	"キット",
 }
 
-
-
-
-
+//isoを確認するためのkey
+var IsoCheckKeyList = map[string]string{
+	"basic":  "標準：",
+	"extend": "拡張：",
+	"iso":    "ISO",
+}

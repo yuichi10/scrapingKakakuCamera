@@ -1,7 +1,10 @@
 package product
+
 import (
-    _ "fmt"
+	_ "fmt"
+	"strings"
 )
+
 //一眼レフカメラ
 type DslrCameraInfo struct {
 	Name                 string  `json:"name"`                   //製品名
@@ -84,7 +87,13 @@ func SetDslrCameraInfo(data ...string) *DslrCameraInfo {
 			imageSensor := getImageSensorType(data[i])
 			cameraInfo.ImageSensor = imageSensor
 		case 7:
+			cameraInfo.LowPassFilter = boolCheck(data[i])
 		case 8:
+			bMin, bMax, eMin, eMax := getIsoValues(strings.TrimSpace(data[i]))
+			cameraInfo.IsoMin = bMin
+			cameraInfo.IsoMax = bMax
+			cameraInfo.IsoExtentionMin = eMin
+			cameraInfo.IsoExtentionMax = eMax
 		case 9:
 		case 10:
 		case 11:
@@ -136,5 +145,3 @@ func SetDslrCameraInfo(data ...string) *DslrCameraInfo {
 	}
 	return cameraInfo
 }
-
-
