@@ -54,3 +54,8 @@ var IsoCheckKeyList = map[string]string{
 	"extend": "拡張：",
 	"iso":    "ISO",
 }
+
+//液晶の情報を取得するKey
+var MonitorCheckKeyList = map[string]string{
+	"inch": "インチ",
+}

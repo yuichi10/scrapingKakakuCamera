@@ -209,3 +209,22 @@ func getShutterSpeeds(val string) (int, int) {
     }
     return max, min
 }
+
+//液晶のサイズとドットを取得
+func getMoniterSizeAndDot(val string) (float64, string) {
+    //val = strings.Replace(val, MonitorCheckKeyList["inch"], MonitorCheckKeyList["inch"]+" ", -1)
+    //vals := strings.Split(val, " ")
+    inch := -1.0
+    dot := ""
+    if strings.Index(val, MonitorCheckKeyList["inch"]) >= 0 {
+        vals := strings.Split(val, MonitorCheckKeyList["inch"])
+        inchSize, err := strconv.ParseFloat(vals[0], 64)
+        if err == nil {
+            inch = inchSize
+        }
+        if len(vals) > 1 {
+            dot = vals[len(vals)-1]
+        }
+    }
+    return inch, dot
+}
