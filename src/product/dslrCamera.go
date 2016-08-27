@@ -7,10 +7,10 @@ import (
 
 //一眼レフカメラ
 type DslrCameraInfo struct {
-	Name                 string  `json:"name"`                   //製品名
-	ProductType          int     `json:"product_type"`           //プロダクトタイプ
-	Company              string  `json:"company"`                //制作会社
-	LensType			 string	 `json:"lens_type"`
+	Name                 string  `json:"name"`         //製品名
+	ProductType          int     `json:"product_type"` //プロダクトタイプ
+	Company              string  `json:"company"`      //制作会社
+	LensType             string  `json:"lens_type"`
 	LensMount            int     `json:"lens_mount"`             //レンズアマウント
 	TotalPixels          int     `json:"total_pixels"`           //総画素数
 	ValidPixels          int     `json:"valid_pixels"`           //有効画素数

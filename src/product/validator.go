@@ -340,7 +340,7 @@ func getWeight(val string) float64 {
 
 //焦点距離を渡す(一つしか値がなかった時は両方に同じ値を)
 func getFocalLengths(val string) (int, int) {
-	var nums [] int
+	var nums []int
 	val = strings.TrimSpace(strings.Replace(val, FocalLengthCheckKeyList["unit"], "", -1))
 	vals := strings.Split(val, FocalLengthCheckKeyList["delimiter"])
 	for i := range vals {
