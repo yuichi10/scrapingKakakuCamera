@@ -52,17 +52,17 @@ type DslrCameraInfo struct {
 	BootTime             float64 `json:"boot_time"`              //起動時間
 	Video4k              bool    `json:"video_4k"`               //4K
 	VideoPixelNumber     string  `json:"video_pixel_number"`     //動画記録画素数
-	VideoFps             int     `json:"video_fps"`              //fps
+	VideoFps             float64 `json:"video_fps"`              //fps
 	VideoFileType        string  `json:"video_file_type"`        //ビデオファイル形式
 	VideoCompressionWay  string  `json:"video_compression_way"`  //映像圧縮方式
 	VideoAudioMemoryWay  string  `json:"video_audio_memory_way"` //音声記録方式
 	Nfc                  bool    `json:"nfc"`                    //NFC
 	Wifi                 bool    `json:"wifi"`                   //WIFI
 	WifiDirect           bool    `json:"wifi_direct"`            //wifi_direct
-	Width                int     `json:"width"`                  //幅
-	Height               int     `json:"height"`                 //高さ
-	Depth                int     `json:"depth"`                  //奥行き
-	Weight               int     `json:"weight"`                 //重さ
+	Width                float64 `json:"width"`                  //幅
+	Height               float64 `json:"height"`                 //高さ
+	Depth                float64 `json:"depth"`                  //奥行き
+	Weight               float64 `json:"weight"`                 //重さ
 	Color                string  `json:"color"`                  //色
 }
 
@@ -160,20 +160,35 @@ func SetDslrCameraInfo(data ...string) *DslrCameraInfo {
 			cameraInfo.BootTime = getBootTime(strings.TrimSpace(data[i]))
 		case 38:
 		case 39:
+			cameraInfo.Video4k = boolCheck(strings.TrimSpace(data[i]))
 		case 40:
+			cameraInfo.VideoPixelNumber = strings.TrimSpace(data[i])
 		case 41:
+			cameraInfo.VideoFps = getVideoFps(strings.TrimSpace(data[i]))
 		case 42:
+			cameraInfo.VideoFileType = strings.TrimSpace(data[i])
 		case 43:
+			cameraInfo.VideoCompressionWay = strings.TrimSpace(data[i])
 		case 44:
+			cameraInfo.VideoAudioMemoryWay = strings.TrimSpace(data[i])
 		case 45:
+			cameraInfo.Nfc = boolCheck(strings.TrimSpace(data[i]))
 		case 46:
+			cameraInfo.Wifi = boolCheck(strings.TrimSpace(data[i]))
 		case 47:
+			cameraInfo.WifiDirect = boolCheck(strings.TrimSpace(data[i]))
 		case 48:
 		case 49:
+			w, h, d := getSizes(strings.TrimSpace(data[i]))
+			cameraInfo.Width = w
+			cameraInfo.Height = h
+			cameraInfo.Depth = d
 		case 50:
+			cameraInfo.Weight = getWeight(strings.TrimSpace(data[i]))
 		case 51:
 		case 52:
 		case 53:
+			cameraInfo.Color = strings.TrimSpace(data[i])
 		case 54:
 		default:
 		}

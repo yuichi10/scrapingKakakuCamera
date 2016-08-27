@@ -67,12 +67,28 @@ var FinderCheckKeyList = map[string]string{
 
 //撮影枚数を取得するためのkey
 var NumberOfShotCheckKeyList = map[string]string{
-	"lcd": "液晶モニタ使用時：",
+	"lcd":    "液晶モニタ使用時：",
 	"finder": "ファインダー使用時：",
-	"unit": "枚",
+	"unit":   "枚",
 }
 
 //起動時間を取得するためのKey
 var BootTimeCheckKeyList = map[string]string{
 	"unit": "秒",
+}
+
+//起動時間を取得するためのKey
+var VideoFpsCheckKeyList = map[string]string{
+	"unit": "fps",
+}
+
+//サイズを取得するためのKey
+var SizeCheckKeyList = map[string]string{
+	"unit":      "mm",
+	"delimiter": "x",
+}
+
+//重さを取得するためのKey
+var WeightCheckKeyList = map[string]string{
+	"unit":      "g",
 }

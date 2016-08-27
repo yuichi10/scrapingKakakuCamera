@@ -11,6 +11,24 @@ func TestVlid() {
 	fmt.Printf("%v : %v : %v : %v", a, b, c, d)
 }
 
+func stringToIntPositive(val string) int {
+	result := -1
+	num, err := strconv.Atoi(strings.TrimSpace(val))
+	if err == nil {
+		result = num
+	}
+	return result
+}
+
+func stringToFloat64Positive(val string) float64 {
+	var result float64 = -1
+	num, err := strconv.ParseFloat(strings.TrimSpace(val), 64)
+	if err == nil {
+		result = num
+	}
+	return result
+}
+
 //プロダクトのタイプを取得
 func getProductType(val string) int {
 	for key, value := range ProductTypeList {
@@ -260,7 +278,7 @@ func getNumberOfShots(val string) (int, int) {
 			finderStr := strings.Replace(vals[i], NumberOfShotCheckKeyList["finder"], "", -1)
 			finderStr = strings.Replace(finderStr, NumberOfShotCheckKeyList["unit"], "", -1)
 			finderNum, err := strconv.Atoi(strings.TrimSpace(finderStr))
-			
+
 			if err == nil {
 				finder = finderNum
 			}
@@ -269,6 +287,7 @@ func getNumberOfShots(val string) (int, int) {
 	return lcd, finder
 }
 
+//起動時間の取得
 func getBootTime(val string) float64 {
 	time := -1.0
 	if strings.Index(val, BootTimeCheckKeyList["unit"]) >= 0 {
@@ -279,4 +298,42 @@ func getBootTime(val string) float64 {
 		}
 	}
 	return time
+}
+
+//video fpsの取得
+func getVideoFps(val string) float64 {
+	fps := -1.0
+	if strings.Index(val, VideoFpsCheckKeyList["unit"]) >= 0 {
+		val = strings.Replace(val, VideoFpsCheckKeyList["unit"], "", -1)
+		fpsNum, err := strconv.ParseFloat(strings.TrimSpace(val), 64)
+		if err == nil {
+			fps = fpsNum
+		}
+	}
+	return fps
+}
+
+//大きさの取得
+func getSizes(val string) (float64, float64, float64) {
+	var w, h, d float64 = -1, -1, -1
+	val = strings.Replace(val, SizeCheckKeyList["unit"], "", -1)
+	vals := strings.Split(val, SizeCheckKeyList["delimiter"])
+	for i := range vals {
+		switch i {
+		case 0:
+			w = stringToFloat64Positive(vals[i])
+		case 1:
+			h = stringToFloat64Positive(vals[i])
+		case 2:
+			d = stringToFloat64Positive(vals[i])
+		}
+	}
+	return w, h, d
+}
+
+//重さを取得
+func getWeight(val string) float64 {
+	val = strings.Replace(val, WeightCheckKeyList["unit"], "", -1)
+	weight := stringToFloat64Positive(val)
+	return weight
 }
