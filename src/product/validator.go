@@ -337,3 +337,66 @@ func getWeight(val string) float64 {
 	weight := stringToFloat64Positive(val)
 	return weight
 }
+
+//焦点距離を渡す(一つしか値がなかった時は両方に同じ値を)
+func getFocalLengths(val string) (int, int) {
+	var nums [] int
+	val = strings.TrimSpace(strings.Replace(val, FocalLengthCheckKeyList["unit"], "", -1))
+	vals := strings.Split(val, FocalLengthCheckKeyList["delimiter"])
+	for i := range vals {
+		if num := stringToIntPositive(vals[i]); num != -1 {
+			nums = append(nums, num)
+		}
+	}
+	if len(nums) == 0 {
+		return -1, -1
+	} else if len(nums) == 1 {
+		return nums[0], nums[0]
+	} else if len(nums) == 2 {
+		num := nums[0]
+		min := -1
+		max := -1
+		if num > nums[1] {
+			min = nums[1]
+			max = num
+		} else {
+			min = num
+			max = nums[1]
+		}
+		return min, max
+	}
+	return -1, -1
+}
+
+//焦点距離を取得
+func getFocusDistance(val string) int {
+	return stringToIntPositive(strings.Replace(val, FocusDistanceCheckKeyList["unit"], "", -1))
+}
+
+//f値の取得
+func getFs(val string) (float64, float64) {
+	var nums []float64
+	var min, max float64
+	vals := strings.Split(val, FCheckKeyList["delimiter"])
+	for i := range vals {
+		if num := stringToFloat64Positive(strings.Replace(vals[i], FCheckKeyList["unit"], "", -1)); num != -1 {
+			nums = append(nums, num)
+		}
+	}
+	if len(nums) == 0 {
+		return -1, -1
+	} else if len(nums) == 1 {
+		return nums[0], nums[0]
+	} else if len(nums) == 2 {
+		num := nums[0]
+		if num > nums[1] {
+			min = nums[1]
+			max = num
+		} else {
+			min = num
+			max = nums[1]
+		}
+		return min, max
+	}
+	return -1, -1
+}

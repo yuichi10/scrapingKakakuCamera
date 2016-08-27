@@ -5,8 +5,7 @@ var ProductTypeList = map[string]int{
 	"other":  0,
 	"一眼レフ":   1,
 	"ミラーレス":  2,
-	"単焦点":    3,
-	"ズームレンズ": 4,
+	"レンズ": 3,
 }
 
 //レンズアマウントのタイプ一覧
@@ -90,5 +89,19 @@ var SizeCheckKeyList = map[string]string{
 
 //重さを取得するためのKey
 var WeightCheckKeyList = map[string]string{
-	"unit":      "g",
+	"unit": "g",
+}
+//焦点距離を取得するためのkey
+var FocalLengthCheckKeyList = map[string]string{
+	"unit": "mm",
+	"delimiter": "～",
+}
+//最大撮影距離を取得するためのkey
+var FocusDistanceCheckKeyList = map[string]string{
+	"unit": "m",
+}
+//F値を取得するためのkey
+var FCheckKeyList = map[string]string{
+	"unit": "F",
+	"delimiter": "-",
 }
