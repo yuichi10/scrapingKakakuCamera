@@ -59,3 +59,20 @@ var IsoCheckKeyList = map[string]string{
 var MonitorCheckKeyList = map[string]string{
 	"inch": "インチ",
 }
+
+//ファインダーの情報を取得するKey
+var FinderCheckKeyList = map[string]string{
+	"magnification": "倍",
+}
+
+//撮影枚数を取得するためのkey
+var NumberOfShotCheckKeyList = map[string]string{
+	"lcd": "液晶モニタ使用時：",
+	"finder": "ファインダー使用時：",
+	"unit": "枚",
+}
+
+//起動時間を取得するためのKey
+var BootTimeCheckKeyList = map[string]string{
+	"unit": "秒",
+}

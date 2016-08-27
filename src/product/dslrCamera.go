@@ -26,7 +26,7 @@ type DslrCameraInfo struct {
 	MonitorSize          float64 `json:"monitor_size"`           //液晶モニターのサイズ
 	MonitorDot           string  `json:"monitor_dot"`            //液晶モニターのドット
 	FinderType           string  `json:"finder_type"`            //ファインダー形式
-	FinderMagnification  int     `json:"finder_magnification"`   //ファインダー倍率
+	FinderMagnification  float64 `json:"finder_magnification"`   //ファインダー倍率
 	FinderFinderCoverage string  `json:"finder_finder_coverage"` //ファインダー視野率
 	BatteryType          string  `json:"battery_type"`           //専用電池タイプ
 	BatteryModel         string  `json:"battery_model"`          //専用電池の型番
@@ -49,7 +49,7 @@ type DslrCameraInfo struct {
 	UsbCharge            bool    `json:"usb_charge"`             //usb充電
 	Interface            string  `json:"interface"`              //インターフェース
 	Gps                  bool    `json:"gps"`                    //GPS
-	BootTime             float32 `json:"boot_time"`              //起動時間
+	BootTime             float64 `json:"boot_time"`              //起動時間
 	Video4k              bool    `json:"video_4k"`               //4K
 	VideoPixelNumber     string  `json:"video_pixel_number"`     //動画記録画素数
 	VideoFps             int     `json:"video_fps"`              //fps
@@ -108,30 +108,56 @@ func SetDslrCameraInfo(data ...string) *DslrCameraInfo {
 			cameraInfo.MonitorSize = inch
 			cameraInfo.MonitorDot = dot
 		case 13:
+			cameraInfo.ContinuousShooting = strings.TrimSpace(data[i])
 		case 14:
+			cameraInfo.FinderMagnification = getFinderMagnification(strings.TrimSpace(data[i]))
 		case 15:
+			cameraInfo.FinderFinderCoverage = strings.TrimSpace(data[i])
 		case 16:
+			cameraInfo.BatteryType = strings.TrimSpace(data[i])
 		case 17:
+			cameraInfo.BatteryModel = strings.TrimSpace(data[i])
 		case 18:
+			lcd, finder := getNumberOfShots(strings.TrimSpace(data[i]))
+			cameraInfo.NumberOfShotLcd = lcd
+			cameraInfo.NumberOfShotFinder = finder
 		case 19:
+			cameraInfo.StorageMedia = strings.TrimSpace(data[i])
 		case 20:
 		case 21:
+			cameraInfo.ImageStabilization = boolCheck(strings.TrimSpace(data[i]))
 		case 22:
+			cameraInfo.DustRemoval = boolCheck(strings.TrimSpace(data[i]))
 		case 23:
+			cameraInfo.Liveview = boolCheck(strings.TrimSpace(data[i]))
 		case 24:
+			cameraInfo.MovableMonitorType = strings.TrimSpace(data[i])
 		case 25:
+			cameraInfo.Selfie = boolCheck(strings.TrimSpace(data[i]))
 		case 26:
+			cameraInfo.PictBridge = boolCheck(strings.TrimSpace(data[i]))
 		case 27:
+			cameraInfo.BuiltInStrobo = boolCheck(strings.TrimSpace(data[i]))
 		case 28:
+			cameraInfo.Bulb = boolCheck(strings.TrimSpace(data[i]))
 		case 29:
+			cameraInfo.Proof = boolCheck(strings.TrimSpace(data[i]))
 		case 30:
+			cameraInfo.RawJpegSaveTogether = boolCheck(strings.TrimSpace(data[i]))
 		case 31:
+			cameraInfo.Raw = strings.TrimSpace(data[i])
 		case 32:
+			cameraInfo.SelfTimer = strings.TrimSpace(data[i])
 		case 33:
+			cameraInfo.Timelaps = boolCheck(strings.TrimSpace(data[i]))
 		case 34:
+			cameraInfo.UsbCharge = boolCheck(strings.TrimSpace(data[i]))
 		case 35:
+			cameraInfo.Interface = strings.TrimSpace(data[i])
 		case 36:
+			cameraInfo.Gps = boolCheck(strings.TrimSpace(data[i]))
 		case 37:
+			cameraInfo.BootTime = getBootTime(strings.TrimSpace(data[i]))
 		case 38:
 		case 39:
 		case 40:

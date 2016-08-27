@@ -190,41 +190,93 @@ func splitIsoPatternB(val string) (int, int, bool) {
 
 //シャッタースピードの取得
 func getShutterSpeeds(val string) (int, int) {
-    min := -1
-    max := -1
-    vals := strings.Split(val, "～")
-    //速い方
-    valMax := strings.TrimSpace(vals[0])
-    valMaxs := strings.Split(valMax, "/")
-    sMax := valMaxs[len(valMaxs)-1]
-    if time, err := strconv.Atoi(sMax); err == nil {
-        max = time
-    }
-    //遅い方
-    valMin := strings.TrimSpace(vals[len(vals)-1])
-    valMins := strings.Split(valMin, " ")
-    sMin := valMins[0]
-    if time, err := strconv.Atoi(sMin); err == nil {
-        min = time
-    }
-    return max, min
+	min := -1
+	max := -1
+	vals := strings.Split(val, "～")
+	//速い方
+	valMax := strings.TrimSpace(vals[0])
+	valMaxs := strings.Split(valMax, "/")
+	sMax := valMaxs[len(valMaxs)-1]
+	if time, err := strconv.Atoi(sMax); err == nil {
+		max = time
+	}
+	//遅い方
+	valMin := strings.TrimSpace(vals[len(vals)-1])
+	valMins := strings.Split(valMin, " ")
+	sMin := valMins[0]
+	if time, err := strconv.Atoi(sMin); err == nil {
+		min = time
+	}
+	return max, min
 }
 
 //液晶のサイズとドットを取得
 func getMoniterSizeAndDot(val string) (float64, string) {
-    //val = strings.Replace(val, MonitorCheckKeyList["inch"], MonitorCheckKeyList["inch"]+" ", -1)
-    //vals := strings.Split(val, " ")
-    inch := -1.0
-    dot := ""
-    if strings.Index(val, MonitorCheckKeyList["inch"]) >= 0 {
-        vals := strings.Split(val, MonitorCheckKeyList["inch"])
-        inchSize, err := strconv.ParseFloat(vals[0], 64)
-        if err == nil {
-            inch = inchSize
-        }
-        if len(vals) > 1 {
-            dot = vals[len(vals)-1]
-        }
-    }
-    return inch, dot
+	inch := -1.0
+	dot := ""
+	if strings.Index(val, MonitorCheckKeyList["inch"]) >= 0 {
+		vals := strings.Split(val, MonitorCheckKeyList["inch"])
+		inchSize, err := strconv.ParseFloat(vals[0], 64)
+		if err == nil {
+			inch = inchSize
+		}
+		if len(vals) > 1 {
+			dot = vals[len(vals)-1]
+		}
+	}
+	return inch, dot
+}
+
+//ファインダー倍率を追加
+func getFinderMagnification(val string) float64 {
+	magni := -1.0
+	if strings.Index(val, FinderCheckKeyList["magnification"]) >= 0 {
+		vals := strings.Split(val, FinderCheckKeyList["magnification"])
+		magnitu, err := strconv.ParseFloat(strings.TrimSpace(vals[0]), 64)
+		if err == nil {
+			magni = magnitu
+		}
+	}
+	return magni
+}
+
+//撮影枚数を取得
+func getNumberOfShots(val string) (int, int) {
+	lcd := -1
+	finder := -1
+	val = strings.Replace(val, NumberOfShotCheckKeyList["unit"], NumberOfShotCheckKeyList["unit"]+" ", -1)
+	vals := strings.Split(val, " ")
+	for i := range vals {
+		if strings.Index(vals[i], NumberOfShotCheckKeyList["lcd"]) >= 0 {
+			//液晶の枚数
+			lcdStr := strings.Replace(vals[i], NumberOfShotCheckKeyList["lcd"], "", -1)
+			lcdStr = strings.Replace(lcdStr, NumberOfShotCheckKeyList["unit"], "", -1)
+			lcdNum, err := strconv.Atoi(strings.TrimSpace(lcdStr))
+			if err == nil {
+				lcd = lcdNum
+			}
+		} else if strings.Index(vals[i], NumberOfShotCheckKeyList["finder"]) >= 0 {
+			//finderの枚数
+			finderStr := strings.Replace(vals[i], NumberOfShotCheckKeyList["finder"], "", -1)
+			finderStr = strings.Replace(finderStr, NumberOfShotCheckKeyList["unit"], "", -1)
+			finderNum, err := strconv.Atoi(strings.TrimSpace(finderStr))
+			
+			if err == nil {
+				finder = finderNum
+			}
+		}
+	}
+	return lcd, finder
+}
+
+func getBootTime(val string) float64 {
+	time := -1.0
+	if strings.Index(val, BootTimeCheckKeyList["unit"]) >= 0 {
+		val = strings.Replace(val, BootTimeCheckKeyList["unit"], "", -1)
+		booltime, err := strconv.ParseFloat(strings.TrimSpace(val), 64)
+		if err == nil {
+			time = booltime
+		}
+	}
+	return time
 }
