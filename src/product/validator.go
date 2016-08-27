@@ -369,8 +369,10 @@ func getFocalLengths(val string) (int, int) {
 }
 
 //焦点距離を取得
-func getFocusDistance(val string) int {
-	return stringToIntPositive(strings.Replace(val, FocusDistanceCheckKeyList["unit"], "", -1))
+func getFocusDistance(val string) float64 {
+	fmt.Println(val)
+	fmt.Println(strings.Replace(val, FocusDistanceCheckKeyList["unit"], "", -1))
+	return stringToFloat64Positive(strings.Replace(val, FocusDistanceCheckKeyList["unit"], "", -1))
 }
 
 //f値の取得

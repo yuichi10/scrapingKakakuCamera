@@ -19,7 +19,7 @@ type LensInfo struct {
 	ApertureBladesNumber     string  `json:"aperture_blades_number"`      //絞り羽根枚数
 	FocalLengthMin           int     `json:"focal_length_max"`            //最小の焦点距離
 	FocalLengthMax           int     `json:"focal_length_max"`            //最大の焦点距離
-	FocusDistance            int     `json:"focus_distance"`              //最短撮影距離
+	FocusDistance            float64 `json:"focus_distance"`              //最短撮影距離
 	MagnificationRatio       string  `json:"magnification_ratio"`         //最大撮影倍率
 	FMin                     float64 `json:"f_min"`                       //開放F値最小
 	FMax                     float64 `json:"f_max"`                       //開放F値最大
@@ -37,7 +37,7 @@ type LensInfo struct {
 	LargeAperture            bool    `json:"large_aperture"`              //大口径
 	MaximumDiameterAndLength string  `json:"maximum_diameter_and_length"` //最大径x長さ
 	Filter                   string  `json:"filter"`                      //フィルター
-	Weight                   int     `json:"weight"`                      //重さ
+	Weight                   float64 `json:"weight"`                      //重さ
 }
 
 func SetLensInfo(data ...string) *LensInfo {
@@ -76,21 +76,36 @@ func SetLensInfo(data ...string) *LensInfo {
             lensInfo.FMin = min
             lensInfo.FMax = max
         case 13:
+            lensInfo.AngleOfView = strings.TrimSpace(data[i])
         case 14:
+            lensInfo.ImageStabilization = boolCheck(strings.TrimSpace(data[i]))
         case 15:
+            lensInfo.Shoot3D = boolCheck(strings.TrimSpace(data[i]))
         case 16:
+            lensInfo.FishEye = boolCheck(strings.TrimSpace(data[i]))
         case 17:
+            lensInfo.Macro = boolCheck(strings.TrimSpace(data[i]))
         case 18:
+            lensInfo.SwingAndTilt = boolCheck(strings.TrimSpace(data[i]))
         case 19:
+            lensInfo.Telephoto = boolCheck(strings.TrimSpace(data[i]))
         case 20:
+            lensInfo.HighMagnification = boolCheck(strings.TrimSpace(data[i]))
         case 21:
+            lensInfo.WideAngle = boolCheck(strings.TrimSpace(data[i]))
         case 22:
+            lensInfo.Mirror = boolCheck(strings.TrimSpace(data[i]))
         case 23:
         case 24:
+            lensInfo.Pancake = boolCheck(strings.TrimSpace(data[i]))
         case 25:
+            lensInfo.LargeAperture = boolCheck(strings.TrimSpace(data[i]))
         case 26:
+            lensInfo.MaximumDiameterAndLength = strings.TrimSpace(data[i])
         case 27:
+            lensInfo.Filter = strings.TrimSpace(data[i])
         case 28:
+            lensInfo.Weight = getWeight(strings.TrimSpace(data[i]))
         case 29:
         }
     }
