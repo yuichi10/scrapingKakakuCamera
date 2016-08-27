@@ -71,125 +71,124 @@ func SetDslrCameraInfo(data ...string) *DslrCameraInfo {
 	for i := range data {
 		switch i {
 		case 0:
-		case 1:
 			cameraInfo.Company = strings.TrimSpace(data[i])
-		case 2:
+		case 1:
 			cameraInfo.Name = getProductName(strings.TrimSpace(data[i]))
-		case 3:
+		case 2:
 			cameraInfo.ProductType = getProductType(strings.TrimSpace(data[i]))
-		case 4:
+		case 3:
 			cameraInfo.LensMount = getLensMountType(strings.TrimSpace(data[i]))
-		case 5:
+		case 4:
 			total, valid := getPixelsValues(strings.TrimSpace(data[i]))
 			cameraInfo.TotalPixels = total
 			cameraInfo.ValidPixels = valid
-		case 6:
+		case 5:
 			imageSensor := getImageSensorType(strings.TrimSpace(data[i]))
 			cameraInfo.ImageSensor = imageSensor
-		case 7:
+		case 6:
 			cameraInfo.LowPassFilter = boolCheck(strings.TrimSpace(data[i]))
-		case 8:
+		case 7:
 			bMin, bMax, eMin, eMax := getIsoValues(strings.TrimSpace(data[i]))
 			cameraInfo.IsoMin = bMin
 			cameraInfo.IsoMax = bMax
 			cameraInfo.IsoExtentionMin = eMin
 			cameraInfo.IsoExtentionMax = eMax
-		case 9:
+		case 8:
 			cameraInfo.MemoryFormat = strings.TrimSpace(data[i])
-		case 10:
+		case 9:
 			cameraInfo.ContinuousShooting = strings.TrimSpace(data[i])
-		case 11:
+		case 10:
 			max, min := getShutterSpeeds(strings.TrimSpace(data[i]))
 			cameraInfo.ShutterSpeedMax = max
 			cameraInfo.ShutterSpeedMin = min
-		case 12:
+		case 11:
 			//cameraInfo
 			inch, dot := getMoniterSizeAndDot(strings.TrimSpace(data[i]))
 			cameraInfo.MonitorSize = inch
 			cameraInfo.MonitorDot = dot
-		case 13:
+		case 12:
 			cameraInfo.ContinuousShooting = strings.TrimSpace(data[i])
-		case 14:
+		case 13:
 			cameraInfo.FinderMagnification = getFinderMagnification(strings.TrimSpace(data[i]))
-		case 15:
+		case 14:
 			cameraInfo.FinderFinderCoverage = strings.TrimSpace(data[i])
-		case 16:
+		case 15:
 			cameraInfo.BatteryType = strings.TrimSpace(data[i])
-		case 17:
+		case 16:
 			cameraInfo.BatteryModel = strings.TrimSpace(data[i])
-		case 18:
+		case 17:
 			lcd, finder := getNumberOfShots(strings.TrimSpace(data[i]))
 			cameraInfo.NumberOfShotLcd = lcd
 			cameraInfo.NumberOfShotFinder = finder
-		case 19:
+		case 18:
 			cameraInfo.StorageMedia = strings.TrimSpace(data[i])
+		case 19:
 		case 20:
-		case 21:
 			cameraInfo.ImageStabilization = boolCheck(strings.TrimSpace(data[i]))
-		case 22:
+		case 21:
 			cameraInfo.DustRemoval = boolCheck(strings.TrimSpace(data[i]))
-		case 23:
+		case 22:
 			cameraInfo.Liveview = boolCheck(strings.TrimSpace(data[i]))
-		case 24:
+		case 23:
 			cameraInfo.MovableMonitorType = strings.TrimSpace(data[i])
-		case 25:
+		case 24:
 			cameraInfo.Selfie = boolCheck(strings.TrimSpace(data[i]))
-		case 26:
+		case 25:
 			cameraInfo.PictBridge = boolCheck(strings.TrimSpace(data[i]))
-		case 27:
+		case 26:
 			cameraInfo.BuiltInStrobo = boolCheck(strings.TrimSpace(data[i]))
-		case 28:
+		case 27:
 			cameraInfo.Bulb = boolCheck(strings.TrimSpace(data[i]))
-		case 29:
+		case 28:
 			cameraInfo.Proof = boolCheck(strings.TrimSpace(data[i]))
-		case 30:
+		case 29:
 			cameraInfo.RawJpegSaveTogether = boolCheck(strings.TrimSpace(data[i]))
-		case 31:
+		case 30:
 			cameraInfo.Raw = strings.TrimSpace(data[i])
-		case 32:
+		case 31:
 			cameraInfo.SelfTimer = strings.TrimSpace(data[i])
-		case 33:
+		case 32:
 			cameraInfo.Timelaps = boolCheck(strings.TrimSpace(data[i]))
-		case 34:
+		case 33:
 			cameraInfo.UsbCharge = boolCheck(strings.TrimSpace(data[i]))
-		case 35:
+		case 34:
 			cameraInfo.Interface = strings.TrimSpace(data[i])
-		case 36:
+		case 35:
 			cameraInfo.Gps = boolCheck(strings.TrimSpace(data[i]))
-		case 37:
+		case 36:
 			cameraInfo.BootTime = getBootTime(strings.TrimSpace(data[i]))
+		case 37:
 		case 38:
-		case 39:
 			cameraInfo.Video4k = boolCheck(strings.TrimSpace(data[i]))
-		case 40:
+		case 39:
 			cameraInfo.VideoPixelNumber = strings.TrimSpace(data[i])
-		case 41:
+		case 40:
 			cameraInfo.VideoFps = getVideoFps(strings.TrimSpace(data[i]))
-		case 42:
+		case 41:
 			cameraInfo.VideoFileType = strings.TrimSpace(data[i])
-		case 43:
+		case 42:
 			cameraInfo.VideoCompressionWay = strings.TrimSpace(data[i])
-		case 44:
+		case 43:
 			cameraInfo.VideoAudioMemoryWay = strings.TrimSpace(data[i])
-		case 45:
+		case 44:
 			cameraInfo.Nfc = boolCheck(strings.TrimSpace(data[i]))
-		case 46:
+		case 45:
 			cameraInfo.Wifi = boolCheck(strings.TrimSpace(data[i]))
-		case 47:
+		case 46:
 			cameraInfo.WifiDirect = boolCheck(strings.TrimSpace(data[i]))
+		case 47:
 		case 48:
-		case 49:
 			w, h, d := getSizes(strings.TrimSpace(data[i]))
 			cameraInfo.Width = w
 			cameraInfo.Height = h
 			cameraInfo.Depth = d
-		case 50:
+		case 49:
 			cameraInfo.Weight = getWeight(strings.TrimSpace(data[i]))
+		case 50:
 		case 51:
 		case 52:
-		case 53:
 			cameraInfo.Color = strings.TrimSpace(data[i])
-		case 54:
+		case 53:
 		default:
 		}
 	}
