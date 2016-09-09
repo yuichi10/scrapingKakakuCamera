@@ -32,7 +32,15 @@ const (
 	KakakuURLCamera = "camera"
 	KakakuURLBody   = "digital-slr-camera"
 	KakakuURLLens   = "camera-lens"
+	KakakuURLVideo  = "video-camera"
 )
+
+var ProductType = map[string]int{
+	"Unknown":      CameraUnknown,
+	KakakuURLBody:  CameraBody,
+	KakakuURLLens:  CameraLens,
+	KakakuURLVideo: VideoCamera,
+}
 
 //どのタイプをするかを保存
 var itemType = CameraUnknown
@@ -77,7 +85,13 @@ func GetPage(url string) {
 		fmt.Printf("url error : %d\n", err)
 		return
 	}
-	pInfo = append(pInfo, getUtf8String(doc.Find(".makerLabel .cateBoxPare").Text()))
+	if maker := doc.Find(".makerLabel .cateBoxPare").Text(); maker != "" {
+		pInfo = append(pInfo, getUtf8String(doc.Find(".makerLabel .cateBoxPare").Text()))
+	} else {
+		pInfo = append(pInfo, getUtf8String(doc.Find(".makerLabel").Text()))
+	}
+	
+	
 	//製品名の取得
 	pInfo = append(pInfo, getUtf8String(doc.Find("h2").Text()))
 	//詳細取得
@@ -165,9 +179,11 @@ func whichItem(url string) int {
 	for i := range urls {
 		switch urls[i] {
 		case KakakuURLLens:
-			return CameraLens
+			return ProductType[KakakuURLLens]
 		case KakakuURLBody:
-			return CameraBody
+			return ProductType[KakakuURLBody]
+		case KakakuURLVideo:
+			return ProductType[KakakuURLVideo]
 		}
 	}
 	return CameraUnknown
@@ -182,7 +198,12 @@ func main() {
 	db.DB()
 	db.AutoMigrate(&product.DslrCameraInfo{})
 	db.AutoMigrate(&product.LensInfo{})
-	//GetPage("http://kakaku.com/item/K0000799663/spec/")
+	db.AutoMigrate(&product.VideoCameraInfo{})
+	itemType = VideoCamera
+	GetPage("http://kakaku.com/item/J0000018187/spec/")
+	GetPage("http://kakaku.com/item/K0000891806/spec/")
+	
+	return
 	if !checkUrl(url) {
 		fmt.Println("url が不正です")
 		return
