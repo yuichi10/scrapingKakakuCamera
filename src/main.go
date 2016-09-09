@@ -25,6 +25,7 @@ const (
 	CameraBody    = 1
 	CameraLens    = 2
 	VideoCamera   = 3
+	Flash = 4
 )
 const (
 	KakakuURL       = "http://kakaku.com"
@@ -33,6 +34,7 @@ const (
 	KakakuURLBody   = "digital-slr-camera"
 	KakakuURLLens   = "camera-lens"
 	KakakuURLVideo  = "video-camera"
+	KakakuURLFlash = "camera-flash"
 )
 
 var ProductType = map[string]int{
@@ -40,6 +42,7 @@ var ProductType = map[string]int{
 	KakakuURLBody:  CameraBody,
 	KakakuURLLens:  CameraLens,
 	KakakuURLVideo: VideoCamera,
+	KakakuURLFlash: Flash,
 }
 
 //どのタイプをするかを保存
@@ -114,6 +117,9 @@ func saveProductInfo(info ...string) {
 	case CameraLens:
 		lens := product.SetLensInfo(info...)
 		db.Create(&lens)
+	case VideoCamera:
+		video := product.SetVideoCameraInfo(info...)
+		db.Create(&video)
 	}
 }
 
@@ -184,6 +190,8 @@ func whichItem(url string) int {
 			return ProductType[KakakuURLBody]
 		case KakakuURLVideo:
 			return ProductType[KakakuURLVideo]
+		case KakakuURLFlash:
+			return ProductType[KakakuURLFlash]
 		}
 	}
 	return CameraUnknown
@@ -199,10 +207,9 @@ func main() {
 	db.AutoMigrate(&product.DslrCameraInfo{})
 	db.AutoMigrate(&product.LensInfo{})
 	db.AutoMigrate(&product.VideoCameraInfo{})
-	itemType = VideoCamera
-	GetPage("http://kakaku.com/item/J0000018187/spec/")
-	GetPage("http://kakaku.com/item/K0000891806/spec/")
-	
+	itemType = Flash
+	GetPage("http://kakaku.com/item/K0000792966/spec/")
+	//GetPage("http://kakaku.com/item/K0000891806/spec/")
 	return
 	if !checkUrl(url) {
 		fmt.Println("url が不正です")

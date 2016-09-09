@@ -257,6 +257,18 @@ func getFinderMagnification(val string) float64 {
 	}
 	return magni
 }
+//倍率を追加
+func getMagnification(val string) float64 {
+	magni := -1.0
+	if strings.Index(val, MagnificationKeyList["magnification"]) >= 0 {
+		vals := strings.Split(val, MagnificationKeyList["magnification"])
+		magnitu, err := strconv.ParseFloat(strings.TrimSpace(vals[0]), 64)
+		if err == nil {
+			magni = magnitu
+		}
+	}
+	return magni
+}
 
 //撮影枚数を取得
 func getNumberOfShots(val string) (int, int) {
@@ -367,6 +379,35 @@ func getFocalLengths(val string) (int, int) {
 	}
 	return -1, -1
 }
+//焦点距離を渡す(一つしか値がなかった時は両方に同じ値を)
+func getFocalLengthsFloat(val string) (float64, float64) {
+	var nums []float64
+	val = strings.TrimSpace(strings.Replace(val, FocalLengthCheckKeyList["unit"], "", -1))
+	vals := strings.Split(val, FocalLengthCheckKeyList["delimiter"])
+	for i := range vals {
+		if num := stringToFloat64Positive(vals[i]); num != -1 {
+			nums = append(nums, num)
+		}
+	}
+	if len(nums) == 0 {
+		return -1, -1
+	} else if len(nums) == 1 {
+		return nums[0], nums[0]
+	} else if len(nums) == 2 {
+		num := nums[0]
+		min := -1.0
+		max := -1.0
+		if num > nums[1] {
+			min = nums[1]
+			max = num
+		} else {
+			min = num
+			max = nums[1]
+		}
+		return min, max
+	}
+	return -1, -1
+}
 
 //焦点距離を取得
 func getFocusDistance(val string) float64 {
@@ -401,4 +442,43 @@ func getFs(val string) (float64, float64) {
 		return min, max
 	}
 	return -1, -1
+}
+
+// 最低被写体照度の取得
+func getMinFieldOfDepth(val string) int {
+	filedOfDepth := -1
+	if strings.Index(val, DeapthOfFielsKeyList["magnification"]) >= 0 {
+		vals := strings.Split(val, DeapthOfFielsKeyList["magnification"])
+		fod, err := strconv.Atoi(strings.TrimSpace(vals[0]))
+		if err == nil {
+			filedOfDepth = fod
+		}
+	}
+	return filedOfDepth
+}
+
+//防水機能の習得
+func getWaterProof(val string) int {
+	proof := -1
+	if strings.Index(val, WaterProofKeyList["magnification"]) >= 0 {
+		vals := strings.Split(val, WaterProofKeyList["magnification"])
+		wProof, err := strconv.Atoi(strings.TrimSpace(vals[0]))
+		if err == nil {
+			proof = wProof
+		}
+	}
+	return proof
+}
+
+//撮影時間の取得
+func getShootTime(val string) int {
+	time := -1
+	if strings.Index(val, ShootTimeProofKeyList["magnification"]) >= 0 {
+		vals := strings.Split(val, ShootTimeProofKeyList["magnification"])
+		sTime, err := strconv.Atoi(strings.TrimSpace(vals[0]))
+		if err == nil {
+			time = sTime
+		}
+	}
+	return time
 }

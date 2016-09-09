@@ -6,6 +6,8 @@ var ProductTypeList = map[string]int{
 	"一眼レフ":  1,
 	"ミラーレス": 2,
 	"レンズ":   3,
+	"ハンディカメラ": 4,
+	"アクションカメラ": 5,
 }
 
 //レンズアマウントのタイプ一覧
@@ -107,4 +109,24 @@ var FocusDistanceCheckKeyList = map[string]string{
 var FCheckKeyList = map[string]string{
 	"unit":      "F",
 	"delimiter": "-",
+}
+
+//倍率を求める
+var MagnificationKeyList = map[string]string{
+	"magnification": "倍",
+} 
+
+//被写体照度の取得
+var DeapthOfFielsKeyList = map[string]string{
+	"magnification": "ルクス",
+}
+
+//防水機能
+var WaterProofKeyList = map[string]string{
+	"magnification": "m",
+}
+
+//撮影時間
+var ShootTimeProofKeyList = map[string]string{
+	"magnification": "分",
 }
